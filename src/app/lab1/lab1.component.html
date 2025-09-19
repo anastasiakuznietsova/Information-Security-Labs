@@ -1,0 +1,26 @@
+<div class="page-body">
+    <label>Enter the amount of pseudo-random numbers to generate random sequence</label>
+    <input type="number" [(ngModel)]="n" required>
+    <button (click)="createSequence()" class="generate-button">Generate</button>
+
+    <div *ngIf="randSequence().sequence">
+        <h3>Your generated sequence</h3>
+        <div class="sequence" (click)="onExpandSequence()">
+            <span *ngIf="!isExpanded">Open generated sequence</span>
+            <p *ngIf="isExpanded" class="nums" [ngStyle]="{ display: isExpanded ? 'block' : 'none' }">{{randSequence().sequence}}</p>
+            <button (click)="onExpandSequence()">{{ isExpanded ? '^':'˅'}}</button>
+        </div>
+        <h3>This sequence period: {{randSequence().period}}</h3>
+        <button (click)="onSave()" download="lab1.txt" class="button-save">Save to file</button>
+
+        <p>You can test this generator by clicking this button</p>
+        <button (click)="testGenerator()" class="button-save">Test generator</button>
+        <div *ngIf="testResponse().probability">
+            <h3 class="statistics">Statistics</h3>
+            <p>Generator's probability: {{testResponse().probability}}</p>
+            <p>Cesàro theory's probability: {{testResponse().actualProbability}}</p>
+            <p>Generator's PI value: {{testResponse().PIestimate}}</p>
+            <p>Actual PI value: {{testResponse().PIactual}}</p>
+        </div>
+    </div>
+</div>
